@@ -1,10 +1,11 @@
 
+console.log("create socket server");
 
-console.log('hello to my consoles node app');
+// server
+require('net').createServer(function (socket) {
+    console.log("connected");
 
-let a = 7;
-let b = 8
-
-console.log('my a+b is ', a+b);
-
-
+    socket.on('data', function (data) {
+        console.log('client says (server input)', data.toString());
+    });
+}).listen(8080);

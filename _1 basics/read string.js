@@ -9,7 +9,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-rl.setPrompt('guess> ');
+rl.setPrompt('shuki > ');
 rl.prompt();
 rl.on('line', function(line) {
     if (line === "right") rl.close();

@@ -1,10 +1,12 @@
 
 
-console.log('hello to my consoles node app');
+console.log("create socket client");
 
-let a = 7;
-let b = 8
+// client
+var s = require('net').Socket();
+s.connect(8080);
+s.write('Hello from client');
+s.end();
 
-console.log('my a+b is ', a+b);
 
 
