@@ -1,10 +1,22 @@
 
 
-console.log('hello to my consoles node app');
+console.log('hello to my READER node app');
 
-let a = 7;
-let b = 8
+const readline = require('readline');
 
-console.log('my a+b is ', a+b);
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.setPrompt('guess> ');
+rl.prompt();
+rl.on('line', function(line) {
+    if (line === "right") rl.close();
+    console.log('so u say that you ' + line);
+    rl.prompt();
+}).on('close',function(){
+    process.exit(0);
+});
 
 
