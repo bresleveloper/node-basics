@@ -1,0 +1,48 @@
+<html>
+<body>
+<h1>My Header</h1>
+<p>My paragraph.</p>
+
+<table>
+<thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>age</th>
+    </tr>
+
+</thead>
+<tbody>
+
+</tbody>
+</table>
+
+<script>
+
+function getAllUsers() {
+  var x = new XMLHttpRequest();
+  x.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        //document.getElementById("demo").innerHTML = this.responseText;
+        //[{"id":1,"name":"shuky","age":20}
+        let arr = JSON.parse(this.responseText)
+        let t = document.querySelector('table tbody')
+        arr.forEach(u => {
+            t.innerHTML += '<tr>' + 
+                '<td>' + u.id + '</td>' + 
+                '<td>' + u.name + '</td>' + 
+                '<td>' + u.age + '</td>' + 
+            '</tr>';
+        });
+    }
+  };
+  x.open("GET", "http://localhost:8080/ariel/api/users");
+  x.send();
+}
+
+getAllUsers();
+
+</script>
+
+</body>
+</html>
