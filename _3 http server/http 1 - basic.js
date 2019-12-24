@@ -1,10 +1,13 @@
 
+console.log('create http server');
 
-console.log('hello to my consoles node app');
+var http = require('http');
 
-let a = 7;
-let b = 8
-
-console.log('my a+b is ', a+b);
-
-
+http.createServer(function (req, res) {
+    console.log('http server got request');
+    res.writeHead(200, {
+        'Content-Type': 'text/html',
+        'ariel-type': 'teacxher'
+    });
+    res.end('<h1>Hello CLASS fullstackers!</h1>');
+}).listen(8080);
