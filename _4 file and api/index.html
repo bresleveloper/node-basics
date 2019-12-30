@@ -17,6 +17,10 @@
 </tbody>
 </table>
 
+<dialog >
+    <p>name</p>
+</dialog>
+
 <script>
 
 function getAllUsers() {
@@ -34,6 +38,8 @@ function getAllUsers() {
                 '<td>' + u.age + '</td>' + 
             '</tr>';
         });
+
+        setDialogAndClicks()
     }
   };
   x.open("GET", "http://localhost:8080/ariel/api/users");
@@ -41,6 +47,37 @@ function getAllUsers() {
 }
 
 getAllUsers();
+
+
+setDialogAndClicks = () => {
+    let rows = document.querySelectorAll('table tbody tr')
+    rows.forEach(r => {
+        r.onclick = ev => {
+            getPersonalDataForDialog(r)
+        }
+    })
+}
+
+getPersonalDataForDialog = r => {
+    let id = r.querySelector('td').textContent
+    var x = new XMLHttpRequest();
+    x.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let data = JSON.parse(this.responseText)[0]
+            let p = document.querySelector('dialog p')
+            p.innerHTML = data.name
+
+            let d = document.querySelector('dialog')
+            d.showModal()
+            setTimeout(()=>{
+                d.close()
+            }, 3000)
+        }
+    };
+    x.open("GET", "http://localhost:8080/ariel/api/users/" + id);
+    x.send();
+}
+
 
 </script>
 
